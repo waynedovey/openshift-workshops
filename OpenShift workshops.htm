@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)http://workshop.apps.openshift.redhat.sydney/ccau17/_complete -->
+<html lang="en" class="gr__workshop_apps_openshift_redhat_sydney"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenShift workshops</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="./OpenShift workshops_files/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./OpenShift workshops_files/paper.css">
+  <link rel="stylesheet" type="text/css" href="./OpenShift workshops_files/subdomain.css">
+  <link rel="stylesheet" type="text/css" href="./OpenShift workshops_files/docs.css">
+  
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body data-gr-c-s-loaded="true">
+<div class="navbar navbar-default navbar-openshift">
+  <div class="navbar-header">
+    <a href="http://workshop.apps.openshift.redhat.sydney/" class="navbar-brand"></a>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="hidden-xs hidden-sm">
+        <a href="https://docs.openshift.com/" class="nav-sign-up" target="_blank">Documentation</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="container">
+  <div class="sect1">
+<h2 id="_lab_installing_the_openshift_cli">Lab: Installing the OpenShift CLI</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_command_line_interface">Command Line Interface</h3>
+<div class="paragraph">
+<p>OpenShift ships with a feature rich web console as well as command line tools
+to provide users with a nice interface to work with applications deployed to the
+platform.  The OpenShift tools are a single executable written in the Go
+programming language and is available for the following operating systems:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Microsoft Windows</p>
+</li>
+<li>
+<p>Apple OS X</p>
+</li>
+<li>
+<p>Linux</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_downloading_the_tools">Downloading the tools</h4>
+<div class="paragraph">
+<p>During this lab, we are going to download the client tool and add them to our
+operating system $PATH environment variables so the executable is accessible
+from any directory on the command line.</p>
+</div>
+<div class="paragraph">
+<p>The first thing we want to do is download the correct executable for your
+operating system as linked below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://drive.google.com/open?id=0BzSBX7yS9LvaWjkzVC1ZMHVNOUU">Microsoft Windows</a></p>
+</li>
+<li>
+<p><a href="https://drive.google.com/open?id=0BzSBX7yS9LvaTzI2SHVZdTV6cEk">Apple OS X</a></p>
+</li>
+<li>
+<p><a href="https://drive.google.com/open?id=0BzSBX7yS9LvaS2M0dVcyMlFsX00">Linux 64</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Once the file has been downloaded, you will need to extract the contents as it
+is a compressed archive.  I would suggest saving this file to the following
+directories:</p>
+</div>
+<div class="paragraph">
+<p><strong>Windows:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>C:\OpenShift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>OS X:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>~/OpenShift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Linux:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>~/OpenShift</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_extracting_the_tools">Extracting the tools</h4>
+<div class="paragraph">
+<p>Once you have the tools downloaded, you will need to extract the contents:</p>
+</div>
+<div class="paragraph">
+<p><strong>Windows:</strong></p>
+</div>
+<div class="paragraph">
+<p>In order to extract a zip archive on windows, you will need a zip utility
+installed on your system.  With newer versions of windows (greater than XP),
+this is provided by the operating system.  Just right click on the downloaded
+file using file explorer and select to extract the contents.</p>
+</div>
+<div class="paragraph">
+<p><strong>OS X:</strong></p>
+</div>
+<div class="paragraph">
+<p>Open up a terminal window and change to the directory where you downloaded the
+file.  Once you are in the directory, enter in the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>$ tar zxvf oc-macosx.tar.gz</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Linux:</strong></p>
+</div>
+<div class="paragraph">
+<p>Open up a terminal window and change to the directory where you downloaded the
+file.  Once you are in the directory, enter in the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>$ tar zxvf oc-linux.tar.gz</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_adding_code_oc_code_to_your_path">Adding <code>oc</code> to your PATH</h4>
+<div class="paragraph">
+<p><strong>Windows:</strong></p>
+</div>
+<div class="paragraph">
+<p>Because changing your PATH on windows varies by version of the operating system,
+we will not list each operating system here.  However, the general workflow is
+right click on your computer name inside of the file explorer.  Select Advanced
+system settings. I guess changing your PATH is considered an advanced task? :)
+Click on the advanced tab, and then finally click on Environment variables.
+Once the new dialog opens, select the Path variable and add ";C:\OpenShift" at
+the end.  For an easy way out, you could always just copy it to C:\Windows or a
+directory you know is already on your path. For more detailed instructions:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://support.microsoft.com/en-us/kb/310519">Windows XP</a></p>
+</div>
+<div class="paragraph">
+<p><a href="http://banagale.com/changing-your-system-path-in-windows-vista.htm">Windows Vista</a></p>
+</div>
+<div class="paragraph">
+<p><a href="http://geekswithblogs.net/renso/archive/2009/10/21/how-to-set-the-windows-path-in-windows-7.aspx">Windows 7</a></p>
+</div>
+<div class="paragraph">
+<p><a href="http://www.itechtics.com/customize-windows-environment-variables/">Windows 8</a></p>
+</div>
+<div class="paragraph">
+<p>Windows 10 - Follow the directions above.</p>
+</div>
+<div class="paragraph">
+<p><strong>OS X:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>$ export PATH=$PATH:~/OpenShift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Linux:</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>$ export PATH=$PATH:~/OpenShift</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_verify">Verify</h4>
+<div class="paragraph">
+<p>At this point, we should have the oc tool available for use.  Let’s test this
+out by printing the version of the oc command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>$ oc version</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the following (or something similar):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc v3.5.5.8</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get an error message, you have not updated your path correctly.  If you
+need help, raise your hand and the instructor will assist.</p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="sect1">
+<h2 id="_lab_exploring_the_cli_and_web_console">Lab: Exploring the CLI and Web Console</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_command_line">Command Line</h3>
+<div class="paragraph">
+<p>The first thing we want to do to ensure that our <code>oc</code> command line tools was
+installed and successfully added to our path is login to the OpenShift
+environment that has been provided for this Roadshow session.  In
+order to login, we will use the <code>oc</code> command and then specify the server that we
+want to authenticate to.  For simplicity, export your username and pasword (so you can easily cut-and-paste the code examples)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>export USER_NAME=user001
+export USER_PASSWORD=user001</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Issue the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>$ oc login master.openshift.redhat.sydney -u ${USER_NAME} -p ${USER_PASSWORD}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may see the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>The server uses a certificate signed by an unknown authority.
+You can bypass the certificate check, but any data you send to the server could be intercepted by others.
+Use insecure connections? (y/n):</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Enter in <strong>Y</strong> to use a potentially insecure connection.  The reason you received
+this message is because we are using a self-signed certificate for this
+workshop, but we did not provide you with the CA certificate that was generated
+by OpenShift. In a real-world scenario, either OpenShift’s certificate would be
+signed by a standard CA (eg: Thawte, Verisign, StartSSL, etc.) or signed by a
+corporate-standard CA that you already have installed on your system.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>On some versions of Microsoft Windows, you may get an error that the
+server has an invalid x.509 certificate.  If you receive this error, enter in
+the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>$ oc login master.openshift.redhat.sydney --insecure-skip-tls-verify=true</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>Once you have authenticated to the OpenShift server, you will see the
+following confirmation message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>Login successful.
+
+You don't have any projects. You can try to create a new project, by running
+
+    oc new-project &lt;projectname&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Congratulations, you are now authenticated to the OpenShift server. The
+OpenShift master includes a built-in OAuth server. Developers and administrators
+obtain OAuth access tokens to authenticate themselves to the API. By default
+your authorization token will last for 24 hours. There is more information about
+the login command and its configuration in the <a href="https://docs.openshift.com/container-platform/3.5/cli_reference/get_started_cli.html">OpenShift Documentation</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_a_project">Using a project</h3>
+<div class="paragraph">
+<p>Projects are a top level concept to help you organize your deployments. An
+OpenShift project allows a community of users (or a user) to organize and manage
+their content in isolation from other communities. Each project has its own
+resources, policies (who can or cannot perform actions), and constraints (quotas
+and limits on resources, etc). Projects act as a "wrapper" around all the
+application services and endpoints you (or your teams) are using for your work.</p>
+</div>
+<div class="paragraph">
+<p>During this lab, we are going to use a few different commands to make sure that
+things in the environment are working as expected.  Don’t worry if you don’t
+understand all of the terminology as we will cover it in detail in later labs.</p>
+</div>
+<div class="paragraph">
+<p>The first thing we want to do is create a sample project <strong>explore-${USER_NAME}</strong> project. You
+can do this with the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc new-project explore-${USER_NAME}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see the following confirmation message:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>Now using project "explore-${USER_NAME}" on server "https://master.openshift.redhat.sydney".</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can switch to this project from the CLI at anytime using:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc project explore-${USER_NAME}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_web_console">The Web Console</h3>
+<div class="paragraph">
+<p>OpenShift ships with a web-based console that will allow users to
+perform various tasks via a browser.  To get a feel for how the web console
+works, open your browser and go to the following URL:</p>
+</div>
+<div class="paragraph">
+<p><strong><a href="https://master.openshift.redhat.sydney/" class="bare">https://master.openshift.redhat.sydney</a></strong></p>
+</div>
+<div class="paragraph">
+<p>The first screen you will see is the authentication screen.  Enter in your credentials.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./OpenShift workshops_files/ocp-login.png" alt="OpenShift Login Screen">
+</div>
+</div>
+<div class="paragraph">
+<p>After you have authenticated to the web console, you will be presented with a
+list of projects that your user has permission to work with. You will see
+something that looks like the following image:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./OpenShift workshops_files/explore-webconsole1.png" alt="Web Console">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on the <strong>explore</strong> project. When you click on the
+<strong>explore</strong> project, you will be taken to the project overview page
+which will list all of the routes, services, deployments, and pods that you have
+running as part of your project. There’s nothing there now, but that’s about to
+change.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./OpenShift workshops_files/explore-webconsole2.png" alt="Explore Project">
+</div>
+</div>
+<div class="paragraph">
+<p>Lastly, the web console will show you an error: <em>An error occurred getting
+metrics.</em>  We need to accept another self-signed certificate for OpenShift’s metrics
+aggregation. If we don’t, then the metrics will not display in the OpenShift UI.</p>
+</div>
+<div class="paragraph">
+<p>Click the link that says <strong>Open metrics URL</strong>, and accept the certificate.</p>
+</div>
+<div class="paragraph">
+<p>We will be using a mix of command line tooling and the web console for the labs.
+Get ready!</p>
+</div>
+</div>
+</div>
+</div><div class="sect1">
+<h2 id="_deployment_techniques_and_pipelines_using_jenkins">Deployment techniques and Pipelines using Jenkins</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this lab we are going to learn about pipeline integration with OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>We are going to run through a number of pipeline examples demonstrating common build and deployment techniques, including:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Simple pipeline - the 'HelloWorld' example</p>
+</li>
+<li>
+<p>Blue-Green pipeline</p>
+</li>
+<li>
+<p>A/B pipeline</p>
+</li>
+<li>
+<p>Multi-project pipeline</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The multi-project example will focus on the build / tag / promote lifecycle using our CI/CD tooling - Jenkins.</p>
+</div>
+<input id="toggle" type="checkbox" unchecked="">
+<label for="toggle">Lab Setup</label>
+<div class="sect2" id="expand"><section>
+<div class="paragraph">
+<p><code>DO NOT DO THIS - The pre-reqs have already been done for this lab environment</code></p>
+</div>
+<div class="paragraph">
+<p>Let’s run through the setup so you can repeat in other environments…​</p>
+</div>
+<div class="paragraph">
+<p>We will be using Jenkins image streams in our OpenShift environment:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc import-image --all --insecure=true --confirm -n openshift docker.io/openshift/jenkins-2-centos7
+oc import-image --all --insecure=true --confirm -n openshift registry.access.redhat.com/openshift3/jenkins-2-rhel7</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Jenkins contains the followig necessary plugins:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-pipeline-components.png" alt="Pipeline Components" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Load the following templates for Jenkins if they are not present in your OpenShift environment:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc replace -f https://raw.githubusercontent.com/openshift/openshift-ansible/master/roles/openshift_examples/files/examples/v1.5/quickstart-templates/jenkins-ephemeral-template.json -n openshift
+oc replace -f https://raw.githubusercontent.com/openshift/openshift-ansible/master/roles/openshift_examples/files/examples/v1.5/quickstart-templates/jenkins-persistent-template.json -n openshift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Load the sample application template as well:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc replace -f https://raw.githubusercontent.com/openshift/origin/master/examples/jenkins/pipeline/samplepipeline.yaml -n openshift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The OpenShift cluster should be configured to automatically provision Jenkins by setting the following cluster wide configuration in "master-config.yaml"</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>    jenkinsPipelineConfig:
+        autoProvisionEnabled: true
+        parameters:
+          JENKINS_IMAGE_STREAM_TAG: jenkins-2-rhel7:latest
+          ENABLE_OAUTH: "true"
+        serviceName: jenkins
+        templateName: jenkins-persistent
+        templateNamespace: openshift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The source code for these jenkins images is in github - <a href="https://github.com/openshift/jenkins" class="bare">https://github.com/openshift/jenkins</a> and examples of its use
+can be found here - <a href="https://github.com/openshift/origin/tree/master/examples/jenkins" class="bare">https://github.com/openshift/origin/tree/master/examples/jenkins</a> and here - <a href="https://github.com/openshift/jenkins-plugin" class="bare">https://github.com/openshift/jenkins-plugin</a>
+for the jenkins kubernetes plugin.</p>
+</div>
+</section></div>
+<div class="sect2">
+<h3 id="_a_simple_pipeline">A Simple Pipeline</h3>
+<div class="paragraph">
+<p>Login, and create a project named "samplepipeline-${USER_NAME}"</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc login -u ${USER_NAME} -p ${USER_PASSWORD}
+oc new-project samplepipeline-${USER_NAME} --display-name="Pipeline Sample" --description='Pipeline Sample'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can then create our sample application from template:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc new-app jenkins-pipeline-example</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We could also have used the webui to create the application from this template using the "Add to Project" button:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-jenkins-pipeline-template.png" alt="Pipeline Template" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>A mongodb and jenkins pod should be provisioned into your project. We can browse to the "Build", "Pipeline", "Configuration" and see the
+groovy DSL Jenkinsfile for this pipeline.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-simple-pipeline.png" alt="A Simple Pipeline" width="1100">
+</div>
+</div>
+<div class="paragraph">
+<p>The "openshiftBuild" and "openshiftDeploy" method calls are from the Jenkins OpenShift Pipeline plugin.</p>
+</div>
+<div class="paragraph">
+<p>Start the pipeline build from the web-ui by selecting "Start Build" or:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc start-build sample-pipeline</code></pre>
+</div>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-simple-pipeline-run.png" alt="Running a Simple Pipeline" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Note how the "node()" from the Jenkinsfile DSL is being run in a pod that starts a build pod for our application:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc get pods
+
+NAME                             READY     STATUS      RESTARTS   AGE
+jenkins-1-11fa6                  1/1       Running     0          9m
+mongodb-1-g84t4                  1/1       Running     0          9m
+nodejs-2fc075ffd1b7              1/1       Running     0          2m    <i class="conum" data-value="1"></i><b>(1)</b>
+nodejs-mongodb-example-1-build   0/1       Completed   0          1m    <i class="conum" data-value="2"></i><b>(2)</b>
+nodejs-mongodb-example-1-tfh02   1/1       Running     0          13s   <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Node Pod</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Build Pod</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Running Application</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>If you browse to the running application URL, you can see a simple page count that increments on every visit and is stored in the mongodb.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-simple-jenkins-running-application.png" alt="The running application" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>(Optional) Accessing the Database</strong></p>
+</div>
+<div class="paragraph">
+<p>We can connect to the mongodb to look at the generated data. First we need to get the database credentials that was generated (its an environment variable) - you can find the password using the CLI or browsing to the "Pods" → "Environment" in the UI:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc env dc mongodb --list | grep MONGODB_ADMIN_PASSWORD
+
+MONGODB_ADMIN_PASSWORD=H0XosoaAxsOhpbJq</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use this password to connect to mongodb from the command line:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc rsh $(oc get pods -l name=mongodb -o name)
+mongo -u admin -p &lt;admin password&gt; --authenticationDatabase admin
+&gt; show databases
+&gt; use sampledb
+&gt; show collections
+&gt; db.counts.find();
+
+{ "_id" : ObjectId("58a4d26daf987c001805092f"), "ip" : "172.17.0.1", "date" : 1487196781386 }
+{ "_id" : ObjectId("58a4d277af987c0018050930"), "ip" : "172.17.0.1", "date" : 1487196791551 }
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This shows us the data is stored as one row per page hit per ip address.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_blue_green_pipeline">Blue-Green Pipeline</h3>
+<div class="paragraph">
+<p>The blue-green deployment strategy minimizes the time it takes to perform a deployment cut-over by ensuring you
+have two (or more) versions of your application stacks available during the deployment.</p>
+</div>
+<div class="paragraph">
+<p>We can make use of the service and routing tiers
+in OpenShift to easily switch between our two running application stacks - hence it is very simple and fast to perform a rollback.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-blue-green-deployments.png" alt="Blue Green Deployments" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Let’s create a new project:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc new-project bluegreen-${USER_NAME} --display-name="Blue Green Deployments" --description="Blue Green Deployments"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lets deploy both our blue and green applications into the same project:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc new-app "https://github.com/devops-with-openshift/bluegreen#master" --name=blue
+oc new-app "https://github.com/devops-with-openshift/bluegreen#green" --name=green</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We care going to expose services for our endpoints so we can test them independently, and point the 'bluegreen' route to the blue service.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc expose service blue --name=bluegreen
+oc expose service blue --name=blue
+oc expose service green --name=green</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create the blue-green pipeline:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc create -f https://raw.githubusercontent.com/eformat/bluegreen/master/bluegreen-pipeline.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the applications are built and deployed, you should be able to browse to the bluegreen service:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-bluegreen-app.png" alt="Blue Service application" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, it is possible to manually switch the routes via the web-ui or CLI:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc patch route/bluegreen -p '{"spec":{"to":{"name":"green"}}}'
+oc patch route/bluegreen -p '{"spec":{"to":{"name":"blue"}}}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We have automated this switch into a Jenkisfile pipeline as code. Start the pipeline build:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc start-build bluegreen-pipeline</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the pod that runs the pipeline instruction starts, you should see the running pipeline:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-bluegreen-in-progress.png" alt="Blue Green pipeline in progress" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>A build and deployment of the application version that is <code>not</code> currently routed to via the <code>bluegreen</code> route (i.e. either blue or green) will run.</p>
+</div>
+<div class="paragraph">
+<p>There is a manual input task to approve switching the bluegreen route. Select 'Input Required' and login to Jenkins:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-bluegreen-approve.png" alt="Blue Green pipeline approval" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>You can browse to the URL first to ensure this the desired 'green', select 'Proceed':</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-bluegreen-green.png" alt="Green Service application" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Once completed the 'bluegreen' route will show 'green' instead of 'blue'. You can shoose to 'Rollback' the change as well.</p>
+</div>
+<div class="paragraph">
+<p><strong>(Optional) Configure a Webhook to call the pipeline</strong></p>
+</div>
+<div class="paragraph">
+<p>Fork the github project using <strong>your GitHub account</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>https://github.com/devops-with-openshift/bluegreen</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In Github browse to Project → Settings → WebHooks → Add WebHook</p>
+</div>
+<div class="paragraph">
+<p>Don’t enable SSL verification in github (we are using self signed certificates) else you will get a "Peer certificate" authentication error.</p>
+</div>
+<div class="paragraph">
+<p>Enter the webhook copied from OpenShift → Project → Builds → Pipelines → blugreen-pipeline → Configuration → GitHub WebHook URL which looks like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>Payload URL: https://&lt;master api server&gt;:8443/oapi/v1/namespaces/bluegreen-${USER_NAME}/buildconfigs/bluegreen-pipeline/webhooks/&lt;secret&gt;/github</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Patch the source references in your project to use your github fork:</p>
+</div>
+<pre class="highlight"><code>
+oc patch bc/blue -p '{"spec":{"source":{"git":{"uri":"https://github.com/your github username/bluegreen.git","ref": "master"}}}}' --type=strategic -n bluegreen-${USER_NAME}
+oc patch bc/green -p '{"spec":{"source":{"git":{"uri":"https://github.com/your github username/bluegreen.git","ref": "green"}}}}' --type=strategic -n bluegreen-${USER_NAME}
+</code>
+</pre>
+<div class="paragraph">
+<p>You can now make edits in GitHub and these will trigger a build of your OpenShift pipeline.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_a_b_pipeline">A/B Pipeline</h3>
+<div class="paragraph">
+<p>OpenShfit’s exposes API’s to manipulate the Routing tier. We can use this to create an A/B pipeline from our previous bluegreen example.</p>
+</div>
+<div class="paragraph">
+<p>A/B deployments get their name from the ability to test the new application features as part of the deployment. This way you can create a hypothesis, perform an A/B
+deployment, test whether your hypothesis is true or false and either rollback to your initial application state (A) or proceed with your new application state (B).</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-ab-deployment.png" alt="A/B Deployments" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Let’s create weighted route backends for our application. We need to change the default load balancing behaviour from 'least-connection' to 'round-robin'</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc annotate route/bluegreen haproxy.router.openshift.io/balance=roundrobin
+oc set route-backends routes/bluegreen blue=100 green=0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let’s also create our ab-pipeline and start it from the CLI or web-ui:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc create -f https://raw.githubusercontent.com/eformat/bluegreen/master/ab-pipeline.yaml
+oc start-build ab-pipeline</code></pre>
+</div>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-ab-pipeline.png" alt="A/B Deployment pipeline" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>If we set the weights for our services:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-ab-adjust-routes.png" alt="Adjust the routes" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>We can test that 80% of traffic is going to our 'A' (blue) version, and 20% is going to our 'B' (green) version:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>for x in {1..10}; do curl -s http://bluegreen-bluegreen-${USER_NAME}.apps.openshift.redhat.sydney/ | grep -q blue &amp;&amp; echo $x blue || echo $x green; done
+
+1 blue
+2 blue
+3 blue
+4 blue
+5 green
+6 blue
+7 blue
+8 blue
+9 blue
+10 green</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Because the default configuration for HAProxy is to honour sticky sessions using cookies, we can see this in a Browser or from CLI (always get the same version):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>for x in {1..10}; do curl -c /tmp/cookie -b /tmp/cookie -s http://bluegreen-bluegreen-${USER_NAME}.apps.openshift.redhat.sydney | grep -q blue &amp;&amp; echo $x blue || echo $x green; done
+
+1 blue
+2 blue
+3 blue
+4 blue
+5 blue
+6 blue
+7 blue
+8 blue
+9 blue
+10 blue</code></pre>
+</div>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-ab-weights.png" alt="Route weighting" width="1000">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_multi_project_pipeline">Multi Project Pipeline</h3>
+<div class="paragraph">
+<p>Ideally we want to build our immutable application images once then tag the images for promotion into other projects - to perform our pipeline activities such as testing and eventually production deployment. The feedback from our various activities forms the gates for downstream activities. The basics of build, tag and promote forms the foundation for every container based application to flow through our delivery lifecycle.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-multi-project-pipeline.png" alt="Multi project pipeline" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>We are going to setup four projects for our pipeline activities:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>cicd-${USER_NAME} - containing our Jenkins instance</p>
+</li>
+<li>
+<p>development-${USER_NAME} - for building and developing our application images</p>
+</li>
+<li>
+<p>testing-${USER_NAME} - for testing our application</p>
+</li>
+<li>
+<p>production-${USER_NAME} - hosting our production application</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Create the projects:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc new-project cicd-${USER_NAME} --display-name='CICD Jenkins' --description='CICD Jenkins'
+oc new-project development-${USER_NAME} --display-name='MyApp Development' --description='MyApp Development'
+oc new-project testing-${USER_NAME} --display-name='MyApp Testing' --description='MyApp Testing'
+oc new-project production-${USER_NAME} --display-name='MyApp Production' --description='MyApp Production'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Provide the jenkins service account in the cicd project access to our other projects:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc policy add-role-to-user edit system:serviceaccount:cicd-${USER_NAME}:jenkins -n development-${USER_NAME}
+oc policy add-role-to-user edit system:serviceaccount:cicd-${USER_NAME}:jenkins -n testing-${USER_NAME}
+oc policy add-role-to-user edit system:serviceaccount:cicd-${USER_NAME}:jenkins -n production-${USER_NAME}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Allow the testing and production service accounts to pull images from the development namespace:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc policy add-role-to-group system:image-puller system:serviceaccounts:testing-${USER_NAME} -n development-${USER_NAME}
+oc policy add-role-to-group system:image-puller system:serviceaccounts:production-${USER_NAME} -n development-${USER_NAME}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your should now have these projects:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-multi-projects.png" alt="Multiple projects" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>We can deploy our Jenkins container now:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc new-app -n cicd-${USER_NAME} --template=jenkins-persistent -p JENKINS_IMAGE_STREAM_TAG=jenkins-2-centos7:latest -p NAMESPACE=openshift -p MEMORY_LIMIT=2048Mi -p ENABLE_OAUTH=true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And create the pipeline:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc create -n cicd-${USER_NAME} -f https://raw.githubusercontent.com/eformat/pipeline-configs/master/pipeline.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lets create our development application using Source to Image.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc project development-${USER_NAME}
+oc new-app openshift/php:5.6~https://github.com/devops-with-openshift/cotd.git#master --name=myapp
+oc expose service myapp --hostname=cotd-development-${USER_NAME}.apps.openshift.redhat.sydney --name=myapp</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Be sure to use your own environment registry ip and image stream from this command:</code></p>
+</div>
+<pre class="highlight"><code>oc get is -n development-${USER_NAME} --template='{{range .items}}{{.status.dockerImageRepository}}{{end}}'</code>
+</pre>
+<div class="paragraph">
+<p>Let’s setup our testing project, using the image from development and changing the image pull policy to always.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc project testing-${USER_NAME}
+oc create dc myapp --image=172.30.47.62:5000/development-${USER_NAME}/myapp:promoteQA
+oc rollout cancel dc/myapp
+oc patch dc/myapp -p '{"spec":{"template":{"spec":{"containers":[{"name":"default-container","imagePullPolicy":"Always"}]}}}}'
+oc rollout cancel dc/myapp
+oc expose dc myapp --port=8080
+oc expose service myapp --hostname=cotd-testing-${USER_NAME}.apps.openshift.redhat.sydney --name=myapp</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We are using the arbitrary :promoteQA image tag for the testing deployment (which doesn’t yet exist)</p>
+</div>
+<div class="paragraph">
+<p>We can do the same setup for the production project using the promotePRD image tag:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc project production-${USER_NAME}
+oc create dc myapp --image=172.30.47.62:5000/development-${USER_NAME}/myapp:promotePRD
+oc rollout cancel dc/myapp
+oc patch dc/myapp -p '{"spec":{"template":{"spec":{"containers":[{"name":"default-container","imagePullPolicy":"Always"}]}}}}'
+oc rollout cancel dc/myapp
+oc expose dc myapp --port=8080
+oc expose service myapp --hostname=cotd-production-${USER_NAME}.apps.openshift.redhat.sydney --name=myapp</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we are ready to run our pipeline deployment from the cicd-${USER_NAME} project.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc start-build pipeline -n cicd-${USER_NAME}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The first step will log you in to Jennkins via OAuth and query you for your project paramterised username</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-username-pipelines.png" alt="Project Username Parameter" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>Once the image is built and deployed in development, it is tagged 'promoteQA' and deployed into the testing project.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-approve-production.png" alt="Approve to Production" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>You can test the application, and them manually approve the image tagging/promotion to the production project.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-running-application.png" alt="Running Application" width="800">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_versions_and_pull_requests">Versions and Pull Requests</h3>
+<div class="sect4">
+<h5 id="_prerequisites">Prerequisites</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>You will need a valid <code>github user account</code> - <a href="https://github.com/join" class="bare">https://github.com/join</a></p>
+</li>
+<li>
+<p>You need <code>git</code> installed locally - <a href="https://help.github.com/articles/set-up-git/" class="bare">https://help.github.com/articles/set-up-git/</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>you can verify the giot CLI once installed by typing:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>$ git --version
+
+git version 2.9.3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A common developer task is to merge pull requests from other branches. The pipeline plugins in Jenkins support multi-branch merging of pull requests.</p>
+</div>
+<div class="paragraph">
+<p>The OpenShift pipeline plugin and UI is not so advanced in its integration yet, although we can leverage OpenShift to build and merge <code>Pull Requests</code> (PR’s)</p>
+</div>
+<div class="paragraph">
+<p>Pull Requests let you tell others about changes you’ve pushed to a repository on GitHub. Once a pull request is opened, you can discuss and review the potential changes with collaborators and add follow-up commits before the changes are merged into the repository.</p>
+</div>
+<div class="paragraph">
+<p>If you are unfamiliar with <code>Pull Requests</code> (PR’s) read here - <a href="https://help.github.com/articles/about-pull-requests/" class="bare">https://help.github.com/articles/about-pull-requests/</a></p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-standard-merge-commit-diagram.png" alt="Standard Merge" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Let’s try it out.</p>
+</div>
+<div class="paragraph">
+<p>Create a fork of this repository using your github account</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>https://github.com/eformat/node-hello-world-swagger.git</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We will reuse the jenkins instance from before, or recreate it if you haven’t done so already:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc new-project cicd-${USER_NAME} --display-name='CICD Jenkins' --description='CICD Jenkins'
+oc new-app -n cicd-${USER_NAME} --template=jenkins-persistent -p JENKINS_IMAGE_STREAM_TAG=jenkins-2-centos7:latest -p NAMESPACE=openshift -p MEMORY_LIMIT=2048Mi -p ENABLE_OAUTH=true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Login to jenkins with your <code>${USER_NAME}</code> and select <strong>Open Blue Ocean</strong> at the top of the screen.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-blue-ocean.png" alt="Blue Ocean" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Select the <strong>New Pipeline</strong> button and select <strong>Github</strong>.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-blue-ocean-create-pipeline.png" alt="Create Pipeline" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>You need to create a github access token - click the link <strong>Create an access key here</strong> in the blueocean webpage and use that for accessing your source code and repositories.</p>
+</div>
+<div class="paragraph">
+<p>You can also browse to your github profile and create the access token - <a href="https://github.com/settings/profile" class="bare">https://github.com/settings/profile</a> and click "Personal Access Tokens" or browse to - <a href="https://github.com/settings/tokens" class="bare">https://github.com/settings/tokens</a></p>
+</div>
+<div class="paragraph">
+<p>Click "Generate New Token" button, and check the <strong>repo</strong> and <strong>user</strong> sections</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-blue-ocean-github-auth.png" alt="Create access key" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Enter your token into the blueocean webpage.</p>
+</div>
+<div class="paragraph">
+<p>Select your organisation and then select <strong>New Pipeline</strong> from a single repository - use the <code>node-hello-world-swagger</code> repo you forked earlier. Select <strong>Create Pipeline</strong></p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-blue-ocean-pipeline-create.png" alt="Create pipeline from repo" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>The pipeline plugin will automatically scan your github code repository for branches that contain `Jenkinsfile’s and create multi-branch pipeline job entries for these.</p>
+</div>
+<div class="paragraph">
+<p>A <strong>master</strong> branch pipeline build should start running:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-blue-ocean-pipeline-build-complete.png" alt="Pipeline run ok" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>You can match the git references between the deployed pod, its logs and the build that was performed.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-blue-ocean-pipeline-run-summary.png" alt="Pipeline run summary" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>From the running pod:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-blue-ocean-pipeline-run-pod.png" alt="Running pod" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Before we go further, we need to change our pipeline configuration to automatically build PR’s - it is not set as the default.</p>
+</div>
+<div class="paragraph">
+<p>Go to the classic jenkins view and from the top level, select the github organization entry (in the <strong>All</strong> tab) with <strong>your github user name</strong>, in this screenshot example "Stefano Picozzi"</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-classic-view-github-user.png" alt="Classic View" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Select <strong>Configure</strong> and under the <strong>Projects → Advanced button</strong></p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-classic-view-advanced.png" alt="Classic View Advanced" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Check the <code>Build origin PRs (merged with base branch)</code> checkbox and select <strong>Save</strong>.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-blue-ocean-pipeline-config.png" alt="Build PR Config" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Let’s create a git branch for making a change on. Clone <code>your</code> git repo, and create a branch called <strong>feature1</strong> from the command line</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>git clone https://github.com/&lt;Your GitHib UserName&gt;/node-hello-world-swagger.git
+cd node-hello-world-swagger
+git branch feature1
+git checkout feature1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Make a simple change to the code, it doesn’t matter what it is. Commit the change and push the change from your local branch to github:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>echo "pr request ccau" &gt; changelog
+git add .
+git commit -m "changed changelog"
+git push --set-upstream origin feature1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We are now ready to create the pull request in github. Browse to you repository, goto the <strong>Pull requests</strong> tab, and <strong>Create a pull request</strong> between master and feature1 branches - make sure you compare the feature1 branch by clicking <code>compare: feature1</code></p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-github-create-pull-request.png" alt="Build PR Config" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Once created, go back to jenkins and select <strong>Scan Repository Now</strong> link in your repository pipeline (classic view).</p>
+</div>
+<div class="paragraph">
+<p>We could also adjust the repo scan time to be smaller in the configuration (or use a <code>webhook</code> if the OpenShift cluster is available publicly for github to call):</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-scan-repository-now.png" alt="Scan Repo Now" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>A number of things will happen!
+* a new pipeline for the <code>feature1</code> branch will be created and a new pipeline build and deploy will start</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-feature-branch-pielien.png" alt="Feature Branch Pipeline" width="600">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the pull request can be seen in the <strong>Pull requests</strong> tab and a new pipeline build and deploy will start</p>
+</li>
+</ul>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-pr-pipeline.png" alt="PR Pipeline" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Back in github, we can also see that CI checks are updated with the build details:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-github-pr-checks.png" alt="GitHub PR Checks" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Once the <strong>PR</strong> and <strong>feature1</strong> branch pipelines have completed in OpenShift, you can merge from the github UI into <code>master</code></p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-github-pr-merge.png" alt="GitHub PR Merge" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>and delete the <code>feature1</code> branch if it is no longer required:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/15-github-delete-feature1.png" alt="GitHub Delete feature1 branch" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Go back to jenkins and select <strong>Scan Repository Now</strong> link in your repository pipeline (classic view) - the <strong>master</strong> branch will build with the merged code.</p>
+</div>
+<div class="paragraph">
+<p>The different application deployments and branches are running in OpenShift and we can validate the correct git hash versions were built and deployed.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_summary">Summary</h3>
+<div class="paragraph">
+<p>Congratulations ! You have successfully:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>created and deployed the hello world integrted pipeline sample</p>
+</li>
+<li>
+<p>used BlueGreen, A/B deployment strategies using integrated pipelines</p>
+</li>
+<li>
+<p>deployed and configured a multi-project pipeline example that demonstrates a build, tag and promote lifecycle</p>
+</li>
+<li>
+<p>built and deployed a pull request using a git feature branch, pipelines and openshift</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="sect1">
+<h2 id="_lab_zero_downtime_deployment_externalizing_application_configuration_hot_reconfiguration_application_performance_management">Lab: Zero Downtime Deployment; Externalizing Application Configuration; Hot Reconfiguration; Application Performance Management</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_background">Background:</h3>
+<div class="paragraph">
+<p>Once you build your applications, you can guarantee that you will need to change them !</p>
+</div>
+<div class="paragraph">
+<p>We want to ensure that frequent deployments do not impact the availability of our services. And this is where the Zero Downtime Deployment
+(ZDD) comes in. This allows you to deploy a new version of your service without interrupting the operation of the service.</p>
+</div>
+<div class="paragraph">
+<p>Most applications require configuration using environment variables, configuration files and command line arguments. These configuration artifacts
+should be externalized form the application and the immutable image content in order to keep the image portable across our environments.</p>
+</div>
+<div class="paragraph">
+<p>In this lab we are going to learn about using Openshift to deploy a REST web service and demonstrate various configuration aspects to achieve ZDD.
+We’ll also demonstrate hot reconfiguration capabilities and application performance management using popular frameworks (Hawkular, Prometheus, Grafana, Jolokia and Hawt.io)
+along the way.</p>
+</div>
+<div class="paragraph">
+<p>The application stack consists of tools from open source projects including:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Java - <a href="http://openjdk.java.net/" class="bare">http://openjdk.java.net/</a></p>
+</li>
+<li>
+<p>Camel - <a href="http://camel.apache.org/" class="bare">http://camel.apache.org/</a></p>
+</li>
+<li>
+<p>SpringBoot - <a href="https://projects.spring.io/spring-boot/" class="bare">https://projects.spring.io/spring-boot/</a></p>
+</li>
+<li>
+<p>Fabric8 - <a href="https://fabric8.io/" class="bare">https://fabric8.io/</a></p>
+</li>
+<li>
+<p>Hawkular APM - <a href="http://www.hawkular.org/hawkular-apm/" class="bare">http://www.hawkular.org/hawkular-apm/</a></p>
+</li>
+<li>
+<p>Prometheus - <a href="https://prometheus.io/docs/querying/basics/" class="bare">https://prometheus.io/docs/querying/basics/</a></p>
+</li>
+<li>
+<p>Grafana - <a href="http://grafana.org/" class="bare">http://grafana.org/</a></p>
+</li>
+<li>
+<p>Hawt.io - <a href="http://hawt.io/" class="bare">http://hawt.io/</a></p>
+</li>
+</ul>
+</div>
+<input id="toggle" type="checkbox" unchecked="">
+<label for="toggle">Lab Setup</label>
+<div class="sect2" id="expand"><section>
+<div class="paragraph">
+<p><code>DO NOT DO THIS - The pre-reqs have already been done for this lab environment</code></p>
+</div>
+<div class="paragraph">
+<p>Let’s run through the setup so you can repeat in other environments…​</p>
+</div>
+<div class="sect4">
+<h5 id="_nexus">Nexus</h5>
+<div class="paragraph">
+<p>We are going to be building and deploying a Java application. We have deployed a nexus container with a persistent volume claim to cache the
+ maven dependencies required to build the example application. This speeds up our builds as well as saving bandwidth.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc new-project nexus --display-name="Nexus" --description="Nexus"
+oc project nexus
+oc new-app -f https://raw.githubusercontent.com/eformat/openshift-nexus/master/nexus.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the nexus pod has deployed we install the following maven proxy repositories as the <strong>admin/admin123</strong> user:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Repo Name</th>
+<th class="tableblock halign-left valign-top">URL</th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jboss-ga</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://maven.repository.redhat.com/techpreview/all" class="bare">http://maven.repository.redhat.com/techpreview/all</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Release</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fusesource.m2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://repo.fusesource.com/nexus/content/groups/public" class="bare">https://repo.fusesource.com/nexus/content/groups/public</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Release</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">repository.jboss.org</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://repository.jboss.org/nexus/content/groups/public" class="bare">http://repository.jboss.org/nexus/content/groups/public</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mixed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fusesource.ea</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://repo.fusesource.com/nexus/content/groups/ea" class="bare">https://repo.fusesource.com/nexus/content/groups/ea</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Release</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">redhat.ga</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://maven.repository.redhat.com/ga" class="bare">https://maven.repository.redhat.com/ga</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Release</p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-nexus-repos.png" alt="Nexus Repository Manager" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The example application source code contains an override maven settings file that points to this nexus repo. The Source To Image (S2I) java
+builder will use this file:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/eformat/camel-springboot-rest-ose/blob/master/configuration/settings.xml" class="bare">https://github.com/eformat/camel-springboot-rest-ose/blob/master/configuration/settings.xml</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_java_s2i_image">Java S2I Image</h5>
+<div class="paragraph">
+<p>We are going to leverage the Red Hat Java S2I builder image for building and running fat-jar and flat classpath apps</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc import-image -n openshift registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift --confirm --all</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you are a Red Hat customer, the container catalogue gives you details on this image:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-redhat-image-catalog.png" alt="Red Hat Container Catalogue" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>A community based equivalent image is <code>docker.io/fabric8/java-jboss-openjdk8-jdk</code></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_hawkular_apm_agent">Hawkular APM Agent</h5>
+<div class="paragraph">
+<p>We are going to leverage Hawkular Application Performance Managment later in the lab. Hawkular APM can be achieved in three ways:
+* Explicit intialization (in your code)
+* As a spring boot annotation (<em>@CamelOpenTracing</em>)
+* Using a java agent</p>
+</div>
+<div class="paragraph">
+<p>We’re going to use the java agent method today as it demonstrates a common pattern you may have for other agent based tools. We have layered
+ on top of the base S2I Java image the Hawkular agent using a <strong>Dockerfile</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/eformat/hawkular-apm-template/blob/master/Dockerfile" class="bare">https://github.com/eformat/hawkular-apm-template/blob/master/Dockerfile</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The image has been built and deployed into the shared <code>openshift</code> namespace so everyone can use it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>git clone https://github.com/eformat/hawkular-apm-template
+cd hawkular-apm-template
+oc login -u admin -p admin
+oc project openshift
+oc new-build --binary --name=spring-boot-apm
+oc start-build spring-boot-apm --from-dir=. --follow</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We have created an application template that uses the spring-boot-apm image and loaded it into Openshift:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc create -f https://raw.githubusercontent.com/eformat/hawkular-apm-template/master/templates/spring-boot-apm-template.json -n openshift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We have also loaded the Hawkular APM server template and loaded it into OpenShift:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc create -f https://raw.githubusercontent.com/eformat/hawkular-apm-template/master/templates/hawkular-apm-server.yml -n openshift</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_prometheus_and_grafana">Prometheus and Grafana</h5>
+<div class="paragraph">
+<p>We are also going to deploy a local prometheus and grafana instance for application monitoring as well, so we have created an application template using the fabric8 project template and loaded it into Openshift:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc create -f https://raw.githubusercontent.com/fabric8io/templates/master/default/template/metrics.json -n openshift</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_reference_links">Reference Links</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://hawkular.gitbooks.io/" class="bare">https://hawkular.gitbooks.io</a></p>
+</li>
+<li>
+<p><a href="https://github.com/jboss-dockerfiles/hawkular-apm/tree/master/openshift-templates" class="bare">https://github.com/jboss-dockerfiles/hawkular-apm/tree/master/openshift-templates</a></p>
+</li>
+<li>
+<p><a href="http://www.hawkular.org/blog/2017/03/24/distributed-tracing-with-camel.html" class="bare">http://www.hawkular.org/blog/2017/03/24/distributed-tracing-with-camel.html</a></p>
+</li>
+<li>
+<p><a href="https://fabric8.io/guide/metrics.html" class="bare">https://fabric8.io/guide/metrics.html</a></p>
+</li>
+</ul>
+</div>
+</div></section>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_now_you_get_your_hands_dirty_build_and_deploy_the_application">Now you get your hands dirty, build and deploy the application</h3>
+<div class="paragraph">
+<p>Login and create a project for our SpringBoot application:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc login -u ${USER_NAME} -p ${USER_PASSWORD}
+oc new-project helloservice-${USER_NAME} --display-name="Helloservice" --description="Helloservice"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We are going to allow our default service account to <strong>view</strong> the kubernetes api (this is for our spring hot reload function later on)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc policy add-role-to-user view --serviceaccount=default -n $(oc project -q)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Build and deploy the application using the <strong>spring-boot-apm</strong> template and S2I image we built and loaded in the Prerequisites</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc new-app --template=spring-boot-apm -p SOURCE_REPOSITORY_URL="https://github.com/eformat/camel-springboot-rest-ose.git" -p APPLICATION_NAME=camel-springboot-rest
+
+--&gt; Deploying template "spring-boot-apm" in project "openshift"
+
+     spring-boot-apm
+     ---------
+     Application template for Spring Boot applications built using S2I and supporting Hawkular APM.
+
+     * With parameters:
+        * APPLICATION_NAME=camel-springboot-rest
+        * HOSTNAME_HTTP=
+        * SOURCE_REPOSITORY_URL=https://github.com/eformat/camel-springboot-rest-ose.git
+        * SOURCE_REPOSITORY_REF=master
+        * CONTEXT_DIR=/
+        * GITHUB_WEBHOOK_SECRET=VvXDC1LY # generated
+        * GENERIC_WEBHOOK_SECRET=omW14ntS # generated
+        * IMAGE_STREAM_NAMESPACE=openshift
+
+--&gt; Creating resources with label app=spring-boot-apm ...
+    service "camel-springboot-rest" created
+    route "camel-springboot-rest" created
+    imagestream "camel-springboot-rest" created
+    buildconfig "camel-springboot-rest" created
+    deploymentconfig "camel-springboot-rest" created
+--&gt; Success
+    Build scheduled, use 'oc logs -f bc/camel-springboot-rest' to track its progress.
+    Run 'oc status' to view your app.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A build should start and the java dependencies will be pulled from the Nexus server.</p>
+</div>
+<div class="paragraph">
+<p><strong>(Optional)</strong>
+For the developers who want to build the application locally:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>git clone https://github.com/eformat/camel-springboot-rest-ose
+cd camel-springboot-rest-ose
+mvn spring-boot:run</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the image has been built and deployed to the registry, a single pod should be running. We can see a warning about Health Checks which we are going to deal with in a minute.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-springboot-apm-pod.png" alt="SpringBoot APM Pod" width="700">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuring_application_behaviour">Configuring application behaviour</h3>
+<div class="sect4">
+<h5 id="_application_properties_files">Application properties files</h5>
+<div class="paragraph">
+<p>If we browse to our application, we should see that a Swagger-UI - <a href="http://swagger.io/" class="bare">http://swagger.io/</a> has been deployed to the root of our application.</p>
+</div>
+<div class="paragraph">
+<p>There is an bug with our generated swagger documentation - it does not know what our exposed route URL is. As a workaround we set an environment variable to point to our exposed application for the swagger documentation:</p>
+</div>
+<pre class="highlight"><code>oc env dc/camel-springboot-rest SWAGGERUI_HOST=$(oc get route camel-springboot-rest --template='{{ .spec.host }}')</code>
+</pre>
+<div class="paragraph">
+<p>If we try out our Helloservice in the swagger-ui, it should return a Response</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlight"><code>"Default Prop Hi mike ! from pod: camel-springboot-rest-2-wt91a"</code></pre>
+</div>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-swagger-reposnse.png" alt="Swagger Helloservice" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>Default Prop Hi</code> greeting is set in the spring application properties file</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/eformat/camel-springboot-rest-ose/blob/master/src/main/resources/application.properties#L35" class="bare">https://github.com/eformat/camel-springboot-rest-ose/blob/master/src/main/resources/application.properties#L35</a></p>
+</li>
+</ul>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-spring-properties.png" alt="Spring Properties File" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>This is bound into the application using the spring @ConfigurationProperties annotaion</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/eformat/camel-springboot-rest-ose/blob/master/src/main/java/org/example/ApplicationConfigBean.java#L7" class="bare">https://github.com/eformat/camel-springboot-rest-ose/blob/master/src/main/java/org/example/ApplicationConfigBean.java#L7</a></p>
+</li>
+</ul>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-spring-properties-annotation.png" alt="Spring Configuration" width="600">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_environment_variables_deployment_strategies">Environment variables, Deployment strategies</h5>
+<div class="paragraph">
+<p>Lets change the Greeting message using an environment variable:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc env dc/camel-springboot-rest GREETING="Environment Variable Hi "</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By changing the deployment configuration, we will trigger a new deployment. If we browse to our application you might see an HTTP 503, this is because the jvm and our application is in the process of restarting:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-spring-503.png" alt="HTTP 503 Unavailable" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>The default deployment strategy in OpenShift is the <code>Rolling</code> strategy. The rolling strategy performs a rolling update of our application. OpenShift offers <strong>health checks</strong> when deploying our application that tell us when the application is alive - <strong>liveness</strong> and ready to accept user requests - <strong>readiness</strong>.</p>
+</div>
+<div class="paragraph">
+<p>It is crucial for correct deployment behaviour that we set them appropriately for our application. We can do this from the command line or web-ui. Lets define a liveness check for our container that performs a simple shell command (echo), and a readiness check on our API using the spring actuator <strong>/health</strong> status that is built in:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc set probe dc/camel-springboot-rest --liveness -- echo ok
+oc set probe dc/camel-springboot-rest --readiness --get-url=//:8080/health --initial-delay-seconds=15 --timeout-seconds=2</code></pre>
+</div>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-spring-health-check.png" alt="Spring Health Check" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>If we watch the deployment in the web-ui - we can see that the old pod is not stopped and removed until the new pod deployment has successfully passed our defined liveness and readiness health check probes.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-rolling-deployment.png" alt="Rolling Deployment Strategy" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, once deployment has finished, lets try testing our environment variable configured service in swagger</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-env-var-service.png" alt="Enviornment Variable Helloservice" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Yes - it returns the environment variable version of our greeting.</p>
+</div>
+<div class="paragraph">
+<p>How did we achieve this? by using setting a preference in our Java code to return an environment variable (as exposed in our container runtime) over the property file:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/eformat/camel-springboot-rest-ose/blob/master/src/main/java/org/example/ApplicationConfigBean.java#L17" class="bare">https://github.com/eformat/camel-springboot-rest-ose/blob/master/src/main/java/org/example/ApplicationConfigBean.java#L17</a></p>
+</li>
+</ul>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-env-var-code.png" alt="Enviornment Variable Code" width="600">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_config_maps_hot_reload">Config Maps, Hot Reload</h5>
+<div class="paragraph">
+<p>The <code>ConfigMap</code> object in OpenShift provides mechanisms to provide configuration data to the application container while keeping the application images both portable across environments and independent of OpenShift Container Platform. A <code>ConfigMap</code> can be used to store key-value properties, configuration files, JSON blobs and alike.</p>
+</div>
+<div class="paragraph">
+<p>Lets remove our GREETING environment variable we set previously:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc env dc/camel-springboot-rest GREETING-</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And use a ConfigMap to configure our application instead (if you are not using bash shell, it may be easier to copy the yaml into a file instead to create the ConfigMap)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc create -f - &lt;&lt;EOF
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: helloservice
+data:
+  application.yaml: |-
+    helloservice:
+      greeting: ConfigMap Hello
+EOF</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now when we test our API, we should see this greeting</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-config-map-service.png" alt="ConfigMap Helloservice" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>Our config map greeting has been loaded into out application. If we examine the logs, we can see that a pod/container restart <code>did not</code> occur?</p>
+</div>
+<div class="paragraph">
+<p>Looking at the application logs, we can see what has happened:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-config-map-hotreload.png" alt="Spring Cloud Kubernetes" width="1200">
+</div>
+</div>
+<div class="paragraph">
+<p>The application has reloaded the Spring Context (without restarting the JVM) when we changed the ConfigMap</p>
+</div>
+<div class="paragraph">
+<p>We are making use of <code>Spring Cloud Kubernetes</code> - <a href="https://github.com/fabric8io/spring-cloud-kubernetes" class="bare">https://github.com/fabric8io/spring-cloud-kubernetes</a> to discover when changes occur to our project</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-spring-cloud-kubernetes.png" alt="Spring Cloud Kubernetes" width="1200">
+</div>
+</div>
+<div class="paragraph">
+<p>We can <code>Hot Reload</code> the config map</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc replace -f - &lt;&lt;EOF
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: helloservice
+data:
+  application.yaml: |-
+    helloservice:
+      greeting: hot hot hot
+EOF</code></pre>
+</div>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-hot-reload.png" alt="Hot Reload" width="600">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_application_performance_managment">Application Performance Managment</h3>
+<div class="paragraph">
+<p>Lets deploy a Hawkular APM server to our project using a template</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc create -f https://raw.githubusercontent.com/eformat/hawkular-apm-template/master/templates/hawkular-apm-server-deployment.yml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the hawkular apm, and elasticsearch images have been deployed and started, you can login to the Hawkular APM Console using
+<code>admin / password</code> as the credentials. There won’t be any data yet.</p>
+</div>
+<div class="paragraph">
+<p>We need to set some environment variable on our java application to start instrumenting our app using APM:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Environment Variable</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HAWKULAR_APM_URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the HTTP URI for accessing your hawkular server (make sure to not use the HTTPS URL, I did not manage to got it working for now),</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HAWKULAR_APM_USERNAME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the username for connecting APM server, use default <code>admin</code> user</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HAWKULAR_APM_PASSWORD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the password for connecting APM server, use default admin <code>password</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JAVA_OPTIONS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the JVM options for enabling Java agent, use -javaagent:/libs/hawkular-apm-agent.jar=boot:/libs/hawkular-apm-agent.jar that refers to the Hawkular agent previously added to image libs.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Lets set these on the deployment config</p>
+</div>
+<pre class="highlight"><code>oc env dc/camel-springboot-rest HAWKULAR_APM_URI=$(oc get route hawkular-apm --template='http://{{ .spec.host }}') \
+                                HAWKULAR_APM_USERNAME=admin \
+                                HAWKULAR_APM_PASSWORD=password \
+                                JAVA_OPTIONS=-javaagent:/libs/hawkular-apm-agent.jar=boot:/libs/hawkular-apm-agent.jar</code>
+</pre>
+<div class="paragraph">
+<p>Once re-deployed, we can test our application using the swagger-ui again and we should start seeing traffic in the Hawkular APM console</p>
+</div>
+<div class="paragraph">
+<p>We can filter by time spanned text, and look the time taken for each call and drill-down into distributed tracing and latency for each rest call.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-hawkular-apm-component.png" alt="APM Component View" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p>We did not have to annotate or modify our code - it works out of the box using the OpenTracing standard - a vendor-neutral open standard for distributed tracing.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-hawkular-apm-drilldown.png" alt="APM Transaction Drilldown" width="1000">
+</div>
+</div>
+<div class="sect4">
+<h5 id="_hawt_io">Hawt.io</h5>
+<div class="paragraph">
+<p>The base Java image also support the hawt.io console (exposes JMX over REST). You can open the java console</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-open-java-console.png" alt="Open Java Console" width="600">
+</div>
+</div>
+<div class="paragraph">
+<p>to see your Camel Routes in real-time, drill-down into the source code, debug and trace in real-time your camel application</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-hawtio-camel-route.png" alt="Hawt.io Camel Routes" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p>as well as see summary attributes</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-camel-messages.png" alt="Camel Route Attributes" width="1000">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_prometheus_and_grafana_2">Prometheus and Grafana</h5>
+<div class="paragraph">
+<p>Prometheus is another great opensource tool for tracking metrics and integrates with Grafana for graphing.</p>
+</div>
+<div class="paragraph">
+<p>Our application exposes prometheus metrics at the <code>/prometheus</code> URL. Springboot is also configured to expose actuator metrics at <code>/metrics</code>.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-raw-prometheus.png" alt="Raw prometheus metrics" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Lets deploy prometheus locally so we can try it out.</p>
+</div>
+<div class="paragraph">
+<p>First create the metrics service account used by prometheus</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc project helloservice-${USER_NAME}
+oc create serviceaccount metrics</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A cluster admin will need to allow your project’s metric user to query kubernetes (this has been done for you, so <code>don’t run this next command</code>)</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlight"><code>oc login -u admin
+oc adm policy add-cluster-role-to-user cluster-reader system:serviceaccount:helloservice-${USER_NAME}:metrics</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lets deploy the Prometheus and Grafana application using the metrics template into our project and expose their routes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc new-app metrics
+oc expose service prometheus --port=9090
+oc expose svc/grafana2 --port 3000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The Prometheus configuration uses service annotations to discover endpoints, lets annotate our running springboot service</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>oc annotate svc camel-springboot-rest prometheus.io/path='/prometheus' prometheus.io/port='8080' prometheus.io/scrape='true'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If we browse to Prometheus via its route, we can click on the <strong>Status</strong> tab and see the service state is <strong>UP</strong></p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-prometheus-service-up.png" alt="Prometheus service state" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p>Next we can goto the <strong>Graph</strong> tab, and plot one of the metrics - for example: <code>jvm_memory_pool_bytes_used</code>. You can plot any number
+of metrics from the Openshift platform as well (remember we gave it view cluster permissions above).</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-prometheus-graph.png" alt="Prometheus Mertic Graphing" width="1000">
+</div>
+</div>
+<div class="paragraph">
+<p>A more elegant graphing solution is of course Grafana - sign in using <code>admin/admin</code> credentials to the Grafana console:</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-grafana-login.png" alt="Grafana Login" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>There are a bunch of pre-defined dashborads, and we will import our own custom dashboard that queries prometheus.</p>
+</div>
+<div class="paragraph">
+<p>Download this dashboard definition:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>wget https://raw.githubusercontent.com/eformat/camel-springboot-rest-ose/master/camel-springboot-rest-os-grafana-dashboard.json</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Select Home → Import → Choose file in Grafana, and select <code>camel-springboot-rest-os-grafana-dashboard.json</code>. You should see the dashboard
+showing memory and a <strong>hello mike</strong> count. Save this.</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-grafana-dashboard.png" alt="Grafana dashboard" width="1000">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_hawkular_openshift_agent_hosa">Hawkular OpenShift Agent (HOSA)</h5>
+<div class="paragraph">
+<p>System wide metrics deployments for general application performance monitoring is being worked on and is tech preview</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.hawkular.org/blog/2017/01/17/obst-hosa.html" class="bare">http://www.hawkular.org/blog/2017/01/17/obst-hosa.html</a></p>
+</li>
+<li>
+<p><a href="https://docs.openshift.org/latest/install_config/cluster_metrics.html#deploying-hawkular-openshift-agent" class="bare">https://docs.openshift.org/latest/install_config/cluster_metrics.html#deploying-hawkular-openshift-agent</a></p>
+</li>
+</ul>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./OpenShift workshops_files/28-hosa.png" alt="HOSA" width="1000">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_summary">Summary</h3>
+<div class="paragraph">
+<p>Congratulations ! You have successfully:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>created and deployed a springboot microservice</p>
+</li>
+<li>
+<p>configured liveness and readiness probes that allow rolling deployment of the service</p>
+</li>
+<li>
+<p>used configuration maps, environment variables and properties files to configure your application</p>
+</li>
+<li>
+<p>hot reloaded the springboot jvm when the configuration changes</p>
+</li>
+<li>
+<p>monitored, traced and graphed your application performance</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div>
+  <a href="http://workshop.apps.openshift.redhat.sydney/ccau17">END OF LAB</a>
+</div>
+
+
+</div>
+
+<script src="./OpenShift workshops_files/jquery.min.js"></script>
+<script src="./OpenShift workshops_files/bootstrap.min.js"></script>
+
+
+
+
+<script src="./OpenShift workshops_files/http_headers_1.js"></script></body></html>
